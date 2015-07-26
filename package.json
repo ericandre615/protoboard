@@ -6,6 +6,10 @@
   "scripts": {
     "test": "testem"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ericandre615/protoboard.git"
+  },
   "keywords": [
     "protoboard",
     "prototype",

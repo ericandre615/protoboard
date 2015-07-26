@@ -1,6 +1,6 @@
 'use strict';
 
-var Board = {
+var board = {
     prototype: {
         rows: 30,
         columns: 10,
@@ -15,22 +15,22 @@ var Board = {
         options = options || {};
         var config = {
             rows: {
-                value: options.rows || Board.prototype.rows,
+                value: options.rows || board.prototype.rows,
                 writable: true,
                 enumerable: true
             },
             columns: {
-                value: options.columns || Board.prototype.columns,
+                value: options.columns || board.prototype.columns,
                 writable: true,
                 enumerable: true
             },
             rails: {
-                value: options.rails || Board.prototype.rails,
+                value: options.rails || board.prototype.rails,
                 writable: true,
                 enumerable: true
             },
             connections: {
-                value: Board.prototype.collections || [],
+                value: board.prototype.collections || [],
                 writable: true,
                 enumerable: true
             },
@@ -38,20 +38,26 @@ var Board = {
                 writable: false,
                 configurable: false,
                 enumerable: false,
-                value: function connect(pin1, pin2) {  
-                    this.connections.push({ 
-                        pin1: pin1,
-                        pin2: pin2
+                value: function connect(component, pins) {  
+                    if(typeof component === 'undefined') {
+                        throw new ReferenceError('component is undefined');
+                    }
+                    if(typeof pins === 'undefined') {
+                        throw new ReferenceError('pins is undefined');
+                    }
+                    this.connections.push({
+                        component: component,
+                        pins: pins 
                     });
                     return this.connections;
                 }
             }
         }
 
-        return Object.create(Board.prototype, config);
+        return Object.create(board.prototype, config);
     }
 };
 
 if(typeof module !== 'undefined' && module.exports) {
-    module.exports = Board;
+    module.exports = board;
 }

@@ -5,21 +5,35 @@ var jumper = require('./lib/jumper');
 var led = require('./lib/led');
 
 var protoboard = {
+    types: [
+        'board',
+        'capacitor',
+        'resistor',
+        'jumper',
+        'led',
+    ],
     create: function create(type, options) {
         if(type) {
-            if(type.toLowerCase() === 'board') {
+            type = type.toLowerCase();
+
+            if(this.types.indexOf(type) === -1){
+                throw new ReferenceError('not a valid component type');
+                return;
+            }
+
+            if(type === 'board') {
                 return board.create(options);
             }
-            if(type.toLowerCase() === 'capacitor') {
+            if(type === 'capacitor') {
                 return capacitor.create(options);
             }
-            if(type.toLowerCase() === 'resistor') {
+            if(type === 'resistor') {
                 return resistor.create(options);
             }
-            if(type.toLowerCase() === 'jumper') {
+            if(type === 'jumper') {
                 return jumper.create(options);
             }
-            if(type.toLowerCase() === 'led') {
+            if(type === 'led') {
                 return led.create(options);
             }
 

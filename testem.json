@@ -1,0 +1,9 @@
+{
+    "framework": "jasmine2",
+    "src_files": [
+        "tests/bundled.js",
+        "tests/protoboardSpec.js"
+    ],
+    "before_tests": "browserify index.js -o tests/bundled.js",
+    "on_exit": "rm tests/bundled.js"
+}
